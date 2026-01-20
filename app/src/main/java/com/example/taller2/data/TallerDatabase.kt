@@ -6,12 +6,15 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(
-    entities = [Coche::class],
+    entities = [Coche::class,
+        Mecanico::class,
+        Reparacion::class],
     version = 1,
     exportSchema = false
 )
 abstract class TallerDatabase : RoomDatabase() {
-
+    abstract fun mecanicoDao(): MecanicoDao
+    abstract fun reparacionDao(): ReparacionDao
     abstract fun cocheDao(): CocheDao
 
     companion object {

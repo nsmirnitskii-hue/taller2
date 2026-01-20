@@ -42,7 +42,9 @@ class MainActivity : ComponentActivity() {
 fun gestorVentanas(modifier: Modifier) {
     val context = LocalContext.current
 
-    val repositorio = TallerRepository(TallerDatabase.getDatabase(context).cocheDao())
+    val repositorio = TallerRepository(TallerDatabase.getDatabase(context).cocheDao(),
+        TallerDatabase.getDatabase(context).mecanicoDao(),
+        TallerDatabase.getDatabase(context).reparacionDao())
 
     val factory = object : androidx.lifecycle.ViewModelProvider.Factory {
         override fun <T : androidx.lifecycle.ViewModel> create(modelClass: Class<T>): T {

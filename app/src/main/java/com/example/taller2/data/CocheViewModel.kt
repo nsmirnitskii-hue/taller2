@@ -32,7 +32,8 @@ class CocheViewModel(
 
     var nombreResponsable by mutableStateOf("")
         private set
-
+    var id_mecanico by mutableStateOf("")
+        private set
     var filtrarMatricula by mutableStateOf("")
         private set
     var filtrarModelo by mutableStateOf("")
@@ -69,7 +70,8 @@ class CocheViewModel(
                     modelo = modelo.trim(),
                     color = color.trim(),
                     fechaEntrada = fechaEntrada.trim(),
-                    nombreResponsable = nombreResponsable.trim()
+                    nombreResponsable = nombreResponsable.trim(),
+                    id_mecanico = id_mecanico.toInt()
                 )
                 repositorio.insertarCoche(nuevo)
                 onSuccess()
@@ -82,7 +84,7 @@ class CocheViewModel(
 
     suspend fun eliminarCoche(cocheId: Int) {
         MyLog.d("viewModel.eliminarCoche + ${cocheId}")
-        repositorio.eliminarCoche(Coche(cocheId,"","","","",""))
+        repositorio.eliminarCoche(Coche(cocheId,"","","","","",0))
     }
     fun editarCoche(onSuccess: () -> Unit) {
         viewModelScope.launch {
@@ -93,7 +95,8 @@ class CocheViewModel(
                     modelo = modelo.trim(),
                     color = color.trim(),
                     fechaEntrada = fechaEntrada.trim(),
-                    nombreResponsable = nombreResponsable.trim()
+                    nombreResponsable = nombreResponsable.trim(),
+                    id_mecanico = id_mecanico.toInt()
                 )
                 repositorio.actualizarCoche(actualizado)
                 onSuccess()
@@ -142,10 +145,10 @@ class CocheViewModel(
 
     fun insertarDatosPrueba() {
         viewModelScope.launch {
-            val c1 = Coche(0,"AAAAA","Ford","Rojo","01/01/2020","Mikel")
-            val c2 = Coche(0,"EEEEE","Hyundai","Blnco","01/01/2020","Mikel")
-            val c3 = Coche(0,"FFFFF","Seat","Azul","01/01/2020","Mikel")
-            val c4 = Coche(0,"GGGGG","Ford","Negro","01/01/2020","Mikel")
+            val c1 = Coche(0,"AAAAA","Ford","Rojo","01/01/2020","Mikel",0)
+            val c2 = Coche(0,"EEEEE","Hyundai","Blnco","01/01/2020","Mikel",0)
+            val c3 = Coche(0,"FFFFF","Seat","Azul","01/01/2020","Mikel",0)
+            val c4 = Coche(0,"GGGGG","Ford","Negro","01/01/2020","Mikel",0)
             repositorio.insertarCoche(c1)
             repositorio.insertarCoche(c2)
             repositorio.insertarCoche(c3)
